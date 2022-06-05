@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import {MdGpsFixed, MdRoom} from 'react-icons/md'
 import {BsDot} from 'react-icons/bs'
-import cloud from '../assets/Cloud-background.png'
-import lightcloud from '../assets/LightCloud.png'
+import cloud from '../../assets/Cloud-background.png'
+import lightcloud from '../../assets/LightCloud.png'
 
 const SideBar = styled.aside`
     padding-block-start: 42px;
@@ -32,7 +32,7 @@ const SideBar = styled.aside`
             background-image: url(${cloud});
             background-repeat: no-repeat;
             background-color: rgba(30, 33, 58, 1);
-            background-size: 150%;
+            background-size: cover;
             background-position: 55% 500%;
             background-blend-mode: overlay;
             display: flex;
