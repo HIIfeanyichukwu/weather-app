@@ -7,20 +7,18 @@ import Main from './Components/Layout/Main'
 
 const Div = styled.div`
   display: grid;
-  @media (min-width: 1440px) {
-    grid-template-columns: minmax(459px, 25%) 1fr;
+  block-size: 100vh;
+  inline-size: 100%;
 
-    &::-webkit-scrollbar {
-      // display: none;
-    }
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(300px, 20%) 1fr;
+  }
 
-    .sidebar::-webkit-scrollbar {
-      // display: none;
-    }
+  @media (min-width: 1280px) {
 
-    .sidebar {
-      // scrollbar-width: none;
-    }
+    grid-template-columns: minmax(400px, 25%) 1fr;
+
+  
   }
 `
 

@@ -6,6 +6,7 @@ import {FaLocationArrow} from 'react-icons/fa'
 const MainElement = styled.main`
     padding-block-start: 42px;
     background-color: #100e1d;
+    position: relative;
 
     img {
         inline-size: 100%;
@@ -13,7 +14,12 @@ const MainElement = styled.main`
 `
 
 const Div = styled.div`
-    margin-inline: 154px 123px;
+    // margin-inline: 154px 123px;
+    margin-inline: 23px 24px;
+
+    @media (min-width: 1440px) {
+        margin-inline: 154px 123px;
+    }
 
     .temp-toggle {
         display: flex;
@@ -51,14 +57,32 @@ const Button = styled.button`
 
 const Grid = styled.div`
     display: grid;
-    grid-template-columns: repeat(5, minmax(120px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
     gap: 26px;
     margin-block-end: 72px;
+    margin-inline: 54px;
+
+    @media (min-width: 375px) {
+        grid-template-columns: repeat(2, minmax(120px,1fr));
+    }
+
+    @media (min-width: 420px) {
+        grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+    }
+    
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+    }
+
+    @media (min-width: 1280px) {
+        grid-template-columns: repeat(5, minmax(120px, 1fr));
+    }
+
 `
 
 const Highlight = styled.section`
     font-family: "Raleway", sans-serif;
-    margin-block-end: 113px;
+    margin-block-end: 220px;
 
     .title-header {
         color: #e7e7eb;
@@ -70,8 +94,12 @@ const Highlight = styled.section`
 
     .highlights {
         display: grid;
-        grid-template-columns: repeat(2, minmax(328px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
         gap: 48px;
+
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(2, minmax(328px, 1fr));
+        }
 
         .section {
             background-color: #1E213A;
@@ -172,7 +200,10 @@ const Footer = styled.footer`
     line-height: 17px;
     color: #a09fb1;
     text-align: center;
-    margin-block-end: 25px;
+    position: absolute;
+    bottom: 25px;
+    right: 0;
+    left: 0;
 
     a {
         color: inherit;
@@ -184,6 +215,7 @@ const Main = () => {
   return (
     <MainElement className="main">
         <Div className='main-container'>
+
             <div className="temp-toggle">
                 <div className="temp-toggle-btns">
                     <Button className='light'>&deg;C</Button>

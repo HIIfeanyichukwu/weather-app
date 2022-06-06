@@ -7,7 +7,6 @@ import lightcloud from '../../assets/LightCloud.png'
 
 const SideBar = styled.aside`
     padding-block-start: 42px;
-    overflow-x: hidden;
     background-color: rgba(30, 33, 58, 1);
     background-blend-mode: overlay;
     font-family: "Raleway", sans-serif;
@@ -23,6 +22,11 @@ const SideBar = styled.aside`
         justify-content: space-between;
         align-items: center;
         margin-block-end: 31px;
+        margin-inline: 46px;
+
+        @media (min-width: 1024px) {
+            margin-inline: 20px;
+        }
     }
 
     .aside-main {
@@ -98,15 +102,15 @@ const SideBar = styled.aside`
 
     @media (min-width: 1440px) {
         .aside-nav {
-            padding-inline: 46px;
+            // padding-inline: 46px;
         }
 
-        .aside-main {
-            .today-weather-image-container {
-                inline-size: 100%;
-                block-size: 376px;
-            }
-        }
+        // .aside-main {
+        //     .today-weather-image-container {
+        //         inline-size: 100%;
+        //         block-size: 376px;
+        //     }
+        // }
     }
 `
 const Button = styled.button`
