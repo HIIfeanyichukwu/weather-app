@@ -30,14 +30,19 @@ const Grid = styled.div`
 
 `
 
-const GridComponent = () => {
+const GridComponent = ({weatherData, tomorrowDate}) => {
   return (
     <Grid className="temp-forcast">
-        <WeatherCard />
-        <WeatherCard />
-        <WeatherCard />
-        <WeatherCard />
-        <WeatherCard />
+        {
+            weatherData.map(data => 
+                <WeatherCard 
+                    key={data.valid_date} 
+                    data={data} 
+                    nextday={tomorrowDate}
+                />
+            )
+        }
+
     </Grid>
   )
 }

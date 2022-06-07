@@ -124,7 +124,7 @@ const Highlight = styled.section`
                     border-radius: 100%;
                     justify-content: center;
                     align-items: center;
-                    transform: rotate(-180deg);
+                    transform: rotate(${props => props.rotate}deg);
 
                     .icon {
                         width: 24px;
@@ -138,23 +138,63 @@ const Highlight = styled.section`
 
 
 
-const MainContainer = () => {
+const MainContainer = ({weather}) => {
+    let today = weather[0];
+    let nextDate = weather[1].datetime;
+
+    let rotate;
+    switch(today.wind_cdir) {
+        case 'N':
+            rotate = 20;
+        break;
+        case 'NE':
+            rotate = 360;
+        break;
+        case 'NW':
+            rotate = 270;
+        break;
+        case 'E':
+            rotate = 45;
+        break;
+        case 'SW':
+            rotate = 180;
+        break;
+        case 'SE':
+            rotate = 90;
+        break;
+        case 'S':
+            rotate = 130;
+        break;
+        case 'W':
+            rotate = 228;
+        break;
+        default:
+            rotate = 300;
+        break;
+    }
+
+    const kmToM = (km) => {
+        let miles = km * 0.621371;
+        miles = miles.toFixed(1)
+        return miles;
+    }
+
   return (
     <Div className='main-container'>
 
         <TempToggle />
 
-        <GridComponent />
+        <GridComponent weatherData={weather.slice(1)} tomorrowDate={nextDate}/>
 
-        <Highlight className="today-highlight">
+        <Highlight className="today-highlight" rotate={rotate}>
             <h1 className="highlight-title title-header">
                 Today's Highligts
             </h1>
             <div className="highlights">
-                <Wind />
-                <Humidity />
-                <Visibility />
-                <Air />
+                <Wind windspeed={today.wind_spd}/>
+                <Humidity humidity={today.rh}/>
+                <Visibility visibility={kmToM(today.vis)}/>
+                <Air pres={today.pres}/>
             </div>
         </Highlight>
 

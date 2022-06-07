@@ -1,9 +1,33 @@
 import React from 'react'
 import styled from 'styled-components'
+import { format } from 'date-fns'
 import {MdGpsFixed, MdRoom} from 'react-icons/md'
 import {BsDot} from 'react-icons/bs'
 import cloud from '../../assets/Cloud-background.png'
-import lightcloud from '../../assets/LightCloud.png'
+// import lightcloud from '../../assets/LightCloud.png'
+import { 
+    heavyCloud,  
+    thunderStorm,
+    lightRain,
+    heavyRain,
+    shower,
+    snow,
+    heavySnow,
+    sleet,
+    clear,
+    lightClouds
+} from '../../util'
+
+import cl from '../../assets/Clear.png'
+import hc from '../../assets/HeavyCloud.png'
+import hr from '../../assets/HeavyRain.png'
+import lr from '../../assets/LightRain.png'
+import hs from '../../assets/HeavySnow.png'
+import lc from '../../assets/LightCloud.png'
+import sh from '../../assets/Shower.png'
+import sl from '../../assets/Sleet.png'
+import s  from '../../assets/Snow.png'
+import th from '../../assets/Thunderstorm.png'
 
 const SideBar = styled.aside`
     position: relative;
@@ -47,7 +71,7 @@ const SideBar = styled.aside`
             .weather-image {
                 width: 202px;
                 height: 234px;
-                background-image: url(${lightcloud});
+                background-image: url(${props => props.weatherImage});
                 background-size: contain;
                 background-repeat: no-repeat;
             }
@@ -100,19 +124,6 @@ const SideBar = styled.aside`
             }
         }
     }
-
-    @media (min-width: 1440px) {
-        .aside-nav {
-            // padding-inline: 46px;
-        }
-
-        // .aside-main {
-        //     .today-weather-image-container {
-        //         inline-size: 100%;
-        //         block-size: 376px;
-        //     }
-        // }
-    }
 `
 const Button = styled.button`
     cursor: pointer;
@@ -149,9 +160,48 @@ const Button = styled.button`
     }
 `
 
-const Aside = () => {
+const Aside = ({today, city, country}) => {
+
+    let date = format(new Date(today.datetime), "iii, d MMM")
+
+    const weatherCode = today.weather.code
+    let weatherImage;
+
+    if (heavyCloud.includes(weatherCode)) {
+        weatherImage = hc
+    }else if (thunderStorm.includes(weatherCode))
+    {
+        weatherImage = th;
+    }else if (lightRain.includes(weatherCode)) {
+        weatherImage = lr;
+    }else if (heavyRain.includes(weatherCode))
+    {
+        weatherImage = hr;
+    }else if (shower.includes(weatherCode))
+    {
+        weatherImage = sh;
+    }else if (snow.includes(weatherCode))
+    {
+        weatherImage = s;
+    }else if (heavySnow.includes(weatherCode))
+    {
+        weatherImage = hs;
+    }else if (sleet.includes(weatherCode))
+    {
+        weatherImage = sl;
+    }else if (clear.includes(weatherCode))
+    {
+        weatherImage = cl;
+    }else if (lightClouds.includes(weatherCode))
+    {
+        weatherImage = lc;
+    }else {
+        weatherImage = hc;
+    }
+
+
   return (
-    <SideBar className="sidebar">
+    <SideBar className="sidebar" weatherImage={weatherImage}>
         <nav className="aside-nav">
             <Button>Search for places</Button>
             <Button className='rounded' aria-label='location'>
@@ -164,16 +214,16 @@ const Aside = () => {
                 </div>
             </div>
             <div className="weather-info">
-                <p className='temp'>15<span className='small'>&deg;C</span></p>
+                <p className='temp'>{today.temp}<span className='small'>&deg;C</span></p>
                 <p className="temp-desc">
-                    Shower
+                    {today.weather.description}
                 </p>
                 <div className="date">
-                    Today <span className="dot"><BsDot/></span> <time>Fri, 5 June</time>
+                    Today <span className="dot"><BsDot/></span> <time>{date}</time>
                 </div>
                 <div className="location">
                     <p>
-                        <MdRoom className='icon'/> Helsinki
+                        <MdRoom className='icon'/> {city}, {country}
                     </p>
                 </div>
             </div>
