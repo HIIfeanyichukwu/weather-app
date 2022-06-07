@@ -1,16 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import image from '../assets/Clear.png'
-import clouds from '../assets/Cloud-background.png'
+import image from '../../assets/Clear.png'
 
 const Card = styled.div`
-    // padding-inline: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding-block: 18px;
-    // background-image: url(${clouds});
     background-color: #1e213a;
     background-repeat: no-repeat;
     background-size: 110%;

@@ -1,4 +1,3 @@
-// import logo from './logo.svg'
 // import {countries} from 'countries-list'
 // import cities from 'cities.json'
 import styled from 'styled-components'

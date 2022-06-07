@@ -1,43 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import MainContainer from '../UI/MainContainer'
+import GridComponent from '../UI/Grid'
+import FooterCompoent from './FooterCompoent'
+import TempToggle from './TempToggle'
+import Wind from './Highlight/Wind'
+import Humidity from './Highlight/Humidity'
+import Visibility from './Highlight/Visibility'
+import Air from './Highlight/Air'
 
+const Div = styled.div`
+    margin-inline: 23px 24px;
 
-const MainElement = styled.main`
-    padding-block-start: 42px;
-    background-color: #100e1d;
-    position: relative;
-
-    img {
-        inline-size: 100%;
+    @media (min-width: 1280px) {
+        margin-inline: 50px;
     }
+
+    @media (min-width: 1440px) {
+        margin-inline: 154px 123px;
+    }
+
+   
 `
-
-
-
-const Button = styled.button`
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 100%;
-    font-family: "Raleway", sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 21px;
-
-    &.light {
-        background-color: #e7e7eb;
-        color: #110e3c;
-    }
-    &.dark {
-        background-color: #585676;
-        color: #e7e7eb;
-    }
-`
-
-
 
 const Highlight = styled.section`
     font-family: "Raleway", sans-serif;
@@ -152,30 +136,31 @@ const Highlight = styled.section`
     }
 `
 
-const Footer = styled.footer`
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #a09fb1;
-    text-align: center;
-    position: absolute;
-    bottom: 25px;
-    right: 0;
-    left: 0;
 
-    a {
-        color: inherit;
-        font-weight: 700;
-    }
-`
 
-const Main = () => {
+const MainContainer = () => {
   return (
-    <MainElement className="main">
-       <MainContainer />
-    </MainElement>
+    <Div className='main-container'>
+
+        <TempToggle />
+
+        <GridComponent />
+
+        <Highlight className="today-highlight">
+            <h1 className="highlight-title title-header">
+                Today's Highligts
+            </h1>
+            <div className="highlights">
+                <Wind />
+                <Humidity />
+                <Visibility />
+                <Air />
+            </div>
+        </Highlight>
+
+        <FooterCompoent />
+    </Div>
   )
 }
 
-export default Main
+export default MainContainer

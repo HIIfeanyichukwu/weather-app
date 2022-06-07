@@ -6,6 +6,7 @@ import cloud from '../../assets/Cloud-background.png'
 import lightcloud from '../../assets/LightCloud.png'
 
 const SideBar = styled.aside`
+    position: relative;
     padding-block-start: 42px;
     background-color: rgba(30, 33, 58, 1);
     background-blend-mode: overlay;
