@@ -23,20 +23,28 @@ const Div = styled.div`
 
 function App() {
   const [country, setCountry] = useState('USA');
+  const [weather, setWeather ] = useState([]);
   const [city, setCity] = useState('');
-  
+
+
   useEffect(() => {
 
-    let data = localStorage.weather_data;
-    let country = localStorage.weather_country; 
+    let country_data = localStorage.weather_country; 
+    let lon = localStorage.weather_lon;
+    let lat = localStorage.weather_lat;
+    if (lon & lat) {
 
-    if (country & data ) {
-      setWeather(data);
-      setCity(data.city_name)
-      setCountry(country);
-
+      fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=1723148a77444853837f03372fba544a&days=6`)
+      .then(response => response.json())
+      .then(data => {
+        setWeather(data.data);
+        setCity(data.city_name);
+        setCountry(country_data);
+      })
+      return;
+  
     }else {
-
+    
       // Default location weather
       // Geolocation Api Stuff.
       fetch('https://api.weatherbit.io/v2.0/forecast/daily?city=Raleigh,NC&key=1723148a77444853837f03372fba544a&days=6')
@@ -48,7 +56,8 @@ function App() {
     }
   }, [])
 
-  const [weather, setWeather ] = useState([]);
+
+
 
   if (weather[0] == undefined) {
     return "loading...";

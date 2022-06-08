@@ -178,7 +178,8 @@ const Aside = ({today, city, country, setCity, setCountry, setWeather}) => {
                 setCity(data.city_name);
                 setCountry(countries[data.country_code].name);
                 localStorage.setItem('weather_country', countries[data.country_code].name)
-                localStorage.setItem('weather_data', data)
+                localStorage.setItem('weather_lat', lat);
+                localStorage.setItem('weather_lon', lon);
             })
 
         }
