@@ -4,7 +4,8 @@ import { format } from 'date-fns'
 import {MdGpsFixed, MdRoom} from 'react-icons/md'
 import {BsDot} from 'react-icons/bs'
 import cloud from '../../assets/Cloud-background.png'
-// import lightcloud from '../../assets/LightCloud.png'
+import {countries} from 'countries-list'
+
 import { 
     heavyCloud,  
     thunderStorm,
@@ -160,7 +161,41 @@ const Button = styled.button`
     }
 `
 
-const Aside = ({today, city, country}) => {
+const Aside = ({today, city, country, setCity, setCountry, setWeather}) => {
+
+
+    const handleLocation = (e) => {
+        e.preventDefault();
+
+        const success = (position) => {
+            let lat = position.coords.latitude; 
+            let lon = position.coords.longitude;
+
+            fetch(`https://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}&lon=${lon}&key=1723148a77444853837f03372fba544a&days=6`)
+            .then(response => response.json())
+            .then(data => {
+                setWeather(data.data);
+                setCity(data.city_name);
+                setCountry(countries[data.country_code].name);
+                localStorage.setItem('weather_country', countries[data.country_code].name)
+                localStorage.setItem('weather_data', data)
+            })
+
+        }
+
+        const error = (err) => {
+
+        }
+
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
+
+    }
 
     let date = format(new Date(today.datetime), "iii, d MMM")
 
@@ -204,7 +239,11 @@ const Aside = ({today, city, country}) => {
     <SideBar className="sidebar" weatherImage={weatherImage}>
         <nav className="aside-nav">
             <Button>Search for places</Button>
-            <Button className='rounded' aria-label='location'>
+            <Button 
+                onClick={handleLocation}
+                className='rounded' 
+                aria-label='location'
+            >
                 <MdGpsFixed />
             </Button>
         </nav>

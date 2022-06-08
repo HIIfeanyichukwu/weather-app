@@ -1,4 +1,3 @@
-// import {countries} from 'countries-list'
 // import cities from 'cities.json'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -27,15 +26,26 @@ function App() {
   const [city, setCity] = useState('');
   
   useEffect(() => {
-    // Default location weather
-    // Geolocation Api Stuff.
-    fetch('https://api.weatherbit.io/v2.0/forecast/daily?city=Raleigh,NC&key=1723148a77444853837f03372fba544a&days=6')
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      setWeather(data.data);
-      setCity(data.city_name);
-    })
+
+    let data = localStorage.weather_data;
+    let country = localStorage.weather_country; 
+
+    if (country & data ) {
+      setWeather(data);
+      setCity(data.city_name)
+      setCountry(country);
+
+    }else {
+
+      // Default location weather
+      // Geolocation Api Stuff.
+      fetch('https://api.weatherbit.io/v2.0/forecast/daily?city=Raleigh,NC&key=1723148a77444853837f03372fba544a&days=6')
+      .then(response => response.json())
+      .then(data => {
+        setWeather(data.data);
+        setCity(data.city_name);
+      })
+    }
   }, [])
 
   const [weather, setWeather ] = useState([]);
@@ -49,7 +59,14 @@ function App() {
   
     return (
       <Div className="App">
-        <Aside today={today} city={city} country={country} />
+        <Aside 
+          today={today} 
+          city={city} 
+          country={country} 
+          setCity={setCity}
+          setCountry={setCountry} 
+          setWeather={setWeather}
+        />
         <Main weather={weather}/>
       </Div>
     )
