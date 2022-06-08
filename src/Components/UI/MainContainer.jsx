@@ -138,7 +138,7 @@ const Highlight = styled.section`
 
 
 
-const MainContainer = ({weather}) => {
+const MainContainer = ({weather, fahrenheit, setFahrenheit}) => {
     let today = weather[0];
     let nextDate = weather[1].datetime;
 
@@ -182,9 +182,13 @@ const MainContainer = ({weather}) => {
   return (
     <Div className='main-container'>
 
-        <TempToggle />
+        <TempToggle setFahrenheit={setFahrenheit}/>
 
-        <GridComponent weatherData={weather.slice(1)} tomorrowDate={nextDate}/>
+        <GridComponent 
+            weatherData={weather.slice(1)} 
+            tomorrowDate={nextDate}
+            fahrenheit={fahrenheit}
+        />
 
         <Highlight className="today-highlight" rotate={rotate}>
             <h1 className="highlight-title title-header">

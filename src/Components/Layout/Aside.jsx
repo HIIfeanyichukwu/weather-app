@@ -16,7 +16,8 @@ import {
     heavySnow,
     sleet,
     clear,
-    lightClouds
+    lightClouds,
+    toFah
 } from '../../util'
 
 import cl from '../../assets/Clear.png'
@@ -161,7 +162,7 @@ const Button = styled.button`
     }
 `
 
-const Aside = ({today, city, country, setCity, setCountry, setWeather}) => {
+const Aside = ({today, city, country, setCity, setCountry, setWeather, fahrenheit}) => {
 
 
     const handleLocation = (e) => {
@@ -235,6 +236,8 @@ const Aside = ({today, city, country, setCity, setCountry, setWeather}) => {
         weatherImage = hc;
     }
 
+    let cel = <span>&deg;C</span>
+    let fah = <span>&deg;F</span>
 
   return (
     <SideBar className="sidebar" weatherImage={weatherImage}>
@@ -254,7 +257,12 @@ const Aside = ({today, city, country, setCity, setCountry, setWeather}) => {
                 </div>
             </div>
             <div className="weather-info">
-                <p className='temp'>{today.temp}<span className='small'>&deg;C</span></p>
+                <p className='temp'>
+                    {(fahrenheit) ? toFah(today.temp) : today.temp}
+                    <span className='small'>
+                        {(fahrenheit) ? fah : cel}
+                    </span>
+                </p>
                 <p className="temp-desc">
                     {today.weather.description}
                 </p>

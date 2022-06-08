@@ -25,6 +25,7 @@ function App() {
   const [country, setCountry] = useState('USA');
   const [weather, setWeather ] = useState([]);
   const [city, setCity] = useState('');
+  const [fahrenheit, setFahrenheit] = useState(false);
 
 
   useEffect(() => {
@@ -75,8 +76,13 @@ function App() {
           setCity={setCity}
           setCountry={setCountry} 
           setWeather={setWeather}
+          fahrenheit={fahrenheit}
         />
-        <Main weather={weather}/>
+        <Main 
+          weather={weather}
+          fahrenheit={fahrenheit}
+          setFahrenheit={setFahrenheit}
+        />
       </Div>
     )
   }

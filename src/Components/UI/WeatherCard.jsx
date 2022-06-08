@@ -13,7 +13,8 @@ import {
     heavySnow,
     sleet,
     clear,
-    lightClouds
+    lightClouds,
+    toFah
 } from '../../util'
 
 import cl from '../../assets/Clear.png'
@@ -84,7 +85,7 @@ const Card = styled.div`
     }
 `
 
-const WeatherCard = ({data, nextday}) => {
+const WeatherCard = ({data, nextday, fahrenheit}) => {
     let date = format(new Date(data.datetime), "iii, d MMM");
     let nextday_f = format(new Date(nextday), "iii, d MMM");
     let weatherCode = data.weather.code;
@@ -121,6 +122,9 @@ const WeatherCard = ({data, nextday}) => {
         weatherImage = hc;
     }
 
+    let cel = <span>&deg;C</span>
+    let fah = <span>&deg;F</span>
+
     return (
         <Card className='weather-card' Image={weatherImage}>
             <h1 className="card-header header">
@@ -130,8 +134,14 @@ const WeatherCard = ({data, nextday}) => {
 
             </div>
             <p className="temps">
-                <span className="temp-hi">{data.high_temp}&deg;C</span>
-                <span className="temp-lo">{data.low_temp}&deg;C</span>
+                <span className="temp-hi">
+                    {(fahrenheit) ? toFah(data.high_temp) : data.high_temp}
+                    {(fahrenheit) ? fah : cel}
+                </span>
+                <span className="temp-lo">
+                    {(fahrenheit) ? toFah(data.low_temp) : data.low_temp}
+                    {(fahrenheit) ? fah : cel}
+                </span>
             </p>
         </Card>
     )       

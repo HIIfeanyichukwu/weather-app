@@ -30,7 +30,7 @@ const Grid = styled.div`
 
 `
 
-const GridComponent = ({weatherData, tomorrowDate}) => {
+const GridComponent = ({weatherData, tomorrowDate, fahrenheit}) => {
   return (
     <Grid className="temp-forcast">
         {
@@ -39,6 +39,7 @@ const GridComponent = ({weatherData, tomorrowDate}) => {
                     key={data.valid_date} 
                     data={data} 
                     nextday={tomorrowDate}
+                    fahrenheit={fahrenheit}
                 />
             )
         }

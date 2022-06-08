@@ -34,12 +34,30 @@ const Button = styled.button`
     }
 `
 
-const TempToggle = () => {
+const TempToggle = ({setFahrenheit}) => {
+
+    const toFah = (e) => {
+        e.preventDefault();
+        setFahrenheit(true)
+    }
+
+    const toCel = (e) => {
+        e.preventDefault()
+        setFahrenheit(false);
+    }
+
   return (
     <Temp className="temp-toggle">
         <div className="temp-toggle-btns">
-            <Button className='light'>&deg;C</Button>
-            <Button className='dark'>&deg;F</Button>
+            <Button 
+                className='light'
+                onClick={toCel}
+            >&deg;C</Button>
+
+            <Button 
+                className='dark'
+                onClick={toFah}
+            >&deg;F</Button>
         </div>
     </Temp>
   )

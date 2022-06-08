@@ -9,6 +9,10 @@ const clear = [800]
 const lightClouds = [801, 802, 803, 711, 721, 731]
 const heavySnow = [602]
 
+const toFah = (c) => {
+    return Math.round((c * 9/5) + 32).toFixed(1);
+}
+
 export {
     heavyCloud,
     thunderStorm,
@@ -19,5 +23,6 @@ export {
     snow,
     sleet,
     clear,
-    lightClouds
+    lightClouds,
+    toFah
 }

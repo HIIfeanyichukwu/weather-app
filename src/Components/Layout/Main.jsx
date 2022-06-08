@@ -15,10 +15,14 @@ const MainElement = styled.main`
 `
 
 
-const Main = ({weather}) => {
+const Main = ({weather, fahrenheit, setFahrenheit}) => {
   return (
     <MainElement className="main">
-       <MainContainer weather={weather} />
+      <MainContainer 
+        fahrenheit={fahrenheit}
+        setFahrenheit={setFahrenheit}
+        weather={weather} 
+      />
     </MainElement>
   )
 }
