@@ -8,3 +8,18 @@
   box-sizing: border-box;
 }
 
+.fixed {
+  position: fixed;
+  height: 100vh;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+}
+
+.scroll {
+  overflow-y: scroll;
+  position: relative;
+  scroll-behavior: smooth;
+  transition: .2s;
+  /* overflow-x: hidden; */
+}

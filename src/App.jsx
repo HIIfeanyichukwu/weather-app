@@ -1,13 +1,14 @@
-// import cities from 'cities.json'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Aside from './Components/Layout/Aside'
 import Main from './Components/Layout/Main'
+import SearchPlaces from './Components/SearchPlaces'
 
 const Div = styled.div`
   display: grid;
   block-size: 100vh;
   inline-size: 100%;
+  position: relative;
 
   @media (min-width: 1024px) {
     grid-template-columns: minmax(300px, 20%) 1fr;
@@ -26,6 +27,8 @@ function App() {
   const [weather, setWeather ] = useState([]);
   const [city, setCity] = useState('');
   const [fahrenheit, setFahrenheit] = useState(false);
+  const [places, setPlaces] = useState(false);
+
 
 
   useEffect(() => {
@@ -35,13 +38,13 @@ function App() {
     let lat = localStorage.weather_lat;
     if (lon & lat) {
 
-      fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=1723148a77444853837f03372fba544a&days=6`)
+      fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&days=6&key=1723148a77444853837f03372fba544a`)
       .then(response => response.json())
       .then(data => {
         setWeather(data.data);
         setCity(data.city_name);
-        setCountry(country_data);
       })
+      setCountry(country_data);
       return;
   
     }else {
@@ -69,15 +72,26 @@ function App() {
   
     return (
       <Div className="App">
-        <Aside 
-          today={today} 
-          city={city} 
-          country={country} 
-          setCity={setCity}
-          setCountry={setCountry} 
-          setWeather={setWeather}
-          fahrenheit={fahrenheit}
-        />
+        {
+          (places) ? 
+          <SearchPlaces 
+            setPlaces={setPlaces} 
+            setCity={setCity} 
+            setCountry={setCountry} 
+            setWeather={setWeather} 
+          />
+          : 
+          <Aside 
+            today={today} 
+            city={city} 
+            country={country} 
+            setCity={setCity}
+            setCountry={setCountry} 
+            setWeather={setWeather}
+            fahrenheit={fahrenheit}
+            setPlaces={setPlaces}
+          />
+        }
         <Main 
           weather={weather}
           fahrenheit={fahrenheit}

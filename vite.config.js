@@ -12,7 +12,8 @@ export default defineConfig({
             "displayName": true,
             "fileName": false,
           }
-        ]
+        ],
+        "minify-mangle-names"
       ]
     }
   })],

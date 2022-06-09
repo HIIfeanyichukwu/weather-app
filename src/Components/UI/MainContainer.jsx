@@ -10,14 +10,11 @@ import Visibility from './Highlight/Visibility'
 import Air from './Highlight/Air'
 
 const Div = styled.div`
-    margin-inline: 23px 24px;
+    margin-inline: 1rem;
+    
 
     @media (min-width: 1280px) {
-        margin-inline: 50px;
-    }
-
-    @media (min-width: 1440px) {
-        margin-inline: 154px 123px;
+        margin-inline: 54px;
     }
 
    
@@ -37,11 +34,14 @@ const Highlight = styled.section`
 
     .highlights {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
         gap: 48px;
 
         @media (min-width: 1024px) {
             grid-template-columns: repeat(2, minmax(328px, 1fr));
+        }
+
+        @media (min-width: 1024px) and (max-width: 1024px) {
+            gap: .8rem;
         }
 
         .section {

@@ -4,8 +4,9 @@ import styled from 'styled-components'
 const Temp = styled.div`
     display: flex;
     justify-content: end;
+    justify-content: flex-end;
     margin-block-end: 66px;
-
+    
     .temp-toggle-btns {
         display: flex;
         gap: 12px;

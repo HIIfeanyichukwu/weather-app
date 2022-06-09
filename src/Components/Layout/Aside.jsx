@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import {MdGpsFixed, MdRoom} from 'react-icons/md'
 import {BsDot} from 'react-icons/bs'
 import cloud from '../../assets/Cloud-background.png'
 import {countries} from 'countries-list'
+
+import SearchPlaces from '../SearchPlaces'
 
 import { 
     heavyCloud,  
@@ -42,7 +44,6 @@ const SideBar = styled.aside`
         width: 24px;
         height: 24px;
     }
-
 
     .aside-nav {
         display: flex;
@@ -162,8 +163,7 @@ const Button = styled.button`
     }
 `
 
-const Aside = ({today, city, country, setCity, setCountry, setWeather, fahrenheit}) => {
-
+const Aside = ({today, city, country, setCity, setCountry, setWeather, fahrenheit, setPlaces}) => {
 
     const handleLocation = (e) => {
         e.preventDefault();
@@ -241,8 +241,16 @@ const Aside = ({today, city, country, setCity, setCountry, setWeather, fahrenhei
 
   return (
     <SideBar className="sidebar" weatherImage={weatherImage}>
+      
         <nav className="aside-nav">
-            <Button>Search for places</Button>
+            <Button
+                onClick={(e) => {
+                    e.preventDefault()
+                    setPlaces(true);
+                    document.querySelector('.App').classList.add('fixed');
+                    document.querySelector('main.main').classList.add('scroll');
+                }}
+            >Search for places</Button>
             <Button 
                 onClick={handleLocation}
                 className='rounded' 
