@@ -4,6 +4,7 @@ import Aside from './Components/Layout/Aside'
 import Main from './Components/Layout/Main'
 import SearchPlaces from './Components/SearchPlaces'
 
+
 const Div = styled.div`
   display: grid;
   block-size: 100vh;
@@ -79,6 +80,7 @@ function App() {
             setCity={setCity} 
             setCountry={setCountry} 
             setWeather={setWeather} 
+
           />
           : 
           <Aside 
