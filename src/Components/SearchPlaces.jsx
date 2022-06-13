@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { lazy, Suspense, useState } from 'react'
 import styled from 'styled-components'
 import {MdOutlineSearch} from 'react-icons/md'
 import close from '../assets/close.svg'
-import SearchItem from './UI/SearchItem'
+// import SearchItem from './UI/SearchItem'
 
 import {countries} from 'countries-list'
 import cities from 'cities.json'
@@ -12,7 +12,7 @@ const Place = styled.div`
     background-color: #1E213A;
     padding-block: 12px;
     // padding-inline: 46px;
-    height: 100vh;
+    block-size: 100%;
     display: flex;
     flex-direction: column;
 
@@ -116,6 +116,8 @@ const UL = styled.ul`
 const SearchPlaces = ({setPlaces, setCity, setCountry, setWeather}) => {
     const [query, setQuery] = useState('0');
 
+    const SearchItem = lazy(() => import('../Components/UI/SearchItem'))
+
     let searches;
     const handleSearch = (e) => {
         e.preventDefault()
@@ -124,12 +126,19 @@ const SearchPlaces = ({setPlaces, setCity, setCountry, setWeather}) => {
    
     }
 
-    searches = cities.filter(city => city.name.startsWith(query));
+
+    searches = cities.filter(city => city.name.toLocaleLowerCase().startsWith(query.toLocaleLowerCase()));
+
+   
     searches = searches.map((city, index) => 
         <SearchItem 
             city={city.name} 
             country={countries[city.country].name} 
             key={`${city.name}_${index}`}
+            setWeather={setWeather}
+            setCountry={setCountry}
+            setCity={setCity}
+            setPlaces={setPlaces}
         />
     )
 
@@ -166,7 +175,9 @@ const SearchPlaces = ({setPlaces, setCity, setCountry, setWeather}) => {
         </SearchBox>
 
         <UL>
-            {searches}
+            <Suspense>
+                {searches}
+            </Suspense>
         </UL>
     </Place>
   )

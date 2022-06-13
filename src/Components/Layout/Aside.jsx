@@ -4,7 +4,6 @@ import { format } from 'date-fns'
 import {MdGpsFixed, MdRoom} from 'react-icons/md'
 import {BsDot} from 'react-icons/bs'
 import cloud from '../../assets/Cloud-background.png'
-import {countries} from 'countries-list'
 
 import SearchPlaces from '../SearchPlaces'
 
@@ -177,8 +176,11 @@ const Aside = ({today, city, country, setCity, setCountry, setWeather, fahrenhei
             .then(data => {
                 setWeather(data.data);
                 setCity(data.city_name);
-                setCountry(countries[data.country_code].name);
-                localStorage.setItem('weather_country', countries[data.country_code].name)
+                import('countries-list')
+                .then(countries => {
+                    setCountry(countries[data.country_code].name);
+                    localStorage.setItem('weather_country', countries[data.country_code].name)
+                })
                 localStorage.setItem('weather_lat', lat);
                 localStorage.setItem('weather_lon', lon);
             })

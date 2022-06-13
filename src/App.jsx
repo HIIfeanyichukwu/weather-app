@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState, lazy } from 'react'
 import styled from 'styled-components'
-import Aside from './Components/Layout/Aside'
-import Main from './Components/Layout/Main'
-import SearchPlaces from './Components/SearchPlaces'
+import Loading from './Components/UI/Loading'
 
 
 const Div = styled.div`
@@ -10,6 +8,7 @@ const Div = styled.div`
   block-size: 100vh;
   inline-size: 100%;
   position: relative;
+  overflow-x: hidden;
 
   @media (min-width: 1024px) {
     grid-template-columns: minmax(300px, 20%) 1fr;
@@ -31,6 +30,11 @@ function App() {
   const [places, setPlaces] = useState(false);
 
 
+  const SearchPlaces = lazy(() => import('./Components/SearchPlaces'));
+  const Aside = lazy(() => import('./Components/Layout/Aside'))
+  const Main = lazy(() => import('./Components/Layout/Main'))
+
+
 
   useEffect(() => {
 
@@ -45,6 +49,7 @@ function App() {
         setWeather(data.data);
         setCity(data.city_name);
       })
+      .catch(error => console.log(error))
       setCountry(country_data);
       return;
   
@@ -65,7 +70,7 @@ function App() {
 
 
   if (weather[0] == undefined) {
-    return "loading...";
+    return <Loading/>
   }
   else {
 
@@ -73,32 +78,37 @@ function App() {
   
     return (
       <Div className="App">
-        {
-          (places) ? 
-          <SearchPlaces 
-            setPlaces={setPlaces} 
-            setCity={setCity} 
-            setCountry={setCountry} 
-            setWeather={setWeather} 
+        <Suspense fallback={<Loading />}>
 
-          />
-          : 
-          <Aside 
-            today={today} 
-            city={city} 
-            country={country} 
-            setCity={setCity}
-            setCountry={setCountry} 
-            setWeather={setWeather}
+          {
+            (places) ? 
+            <Suspense>
+
+              <SearchPlaces 
+                setPlaces={setPlaces} 
+                setCity={setCity} 
+                setCountry={setCountry} 
+                setWeather={setWeather} 
+              />
+            </Suspense>
+            : 
+            <Aside 
+              today={today} 
+              city={city} 
+              country={country} 
+              setCity={setCity}
+              setCountry={setCountry} 
+              setWeather={setWeather}
+              fahrenheit={fahrenheit}
+              setPlaces={setPlaces}
+            />
+          }
+          <Main 
+            weather={weather}
             fahrenheit={fahrenheit}
-            setPlaces={setPlaces}
+            setFahrenheit={setFahrenheit}
           />
-        }
-        <Main 
-          weather={weather}
-          fahrenheit={fahrenheit}
-          setFahrenheit={setFahrenheit}
-        />
+        </Suspense>
       </Div>
     )
   }
