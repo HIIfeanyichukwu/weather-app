@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import {MdGpsFixed, MdRoom} from 'react-icons/md'
 import {BsDot} from 'react-icons/bs'
 import cloud from '../../assets/Cloud-background.png'
 
-import SearchPlaces from '../SearchPlaces'
 
 import { 
     heavyCloud,  
@@ -38,6 +37,8 @@ const SideBar = styled.aside`
     background-color: rgba(30, 33, 58, 1);
     background-blend-mode: overlay;
     font-family: "Raleway", sans-serif;
+    // overflow-y: scroll;
+
 
     .icon {
         width: 24px;
@@ -162,7 +163,10 @@ const Button = styled.button`
     }
 `
 
-const Aside = ({today, city, country, setCity, setCountry, setWeather, fahrenheit, setPlaces}) => {
+const Aside = ({today, city, country, setCity, setCountry, setWeather, fahrenheit}) => {
+
+
+    const [places, setPlaces] = useState(false);
 
     const handleLocation = (e) => {
         e.preventDefault();
@@ -241,16 +245,33 @@ const Aside = ({today, city, country, setCity, setCountry, setWeather, fahrenhei
     let cel = <span>&deg;C</span>
     let fah = <span>&deg;F</span>
 
+  const SearchPlaces = lazy(() => import('../SearchPlaces'));
+
+
   return (
     <SideBar className="sidebar" weatherImage={weatherImage}>
-      
+
+        {
+            places ?
+            <Suspense>
+
+                <SearchPlaces
+                    setCity={setCity}
+                    setCountry={setCountry}
+                    setWeather={setWeather}
+                    setPlaces={setPlaces}
+                />
+            </Suspense>
+            : null
+        }
+
         <nav className="aside-nav">
             <Button
                 onClick={(e) => {
                     e.preventDefault()
                     setPlaces(true);
                     document.querySelector('.App').classList.add('fixed');
-                    document.querySelector('main.main').classList.add('scroll');
+                    document.querySelector('main.main').classList.add('scroll')
                 }}
             >Search for places</Button>
             <Button 

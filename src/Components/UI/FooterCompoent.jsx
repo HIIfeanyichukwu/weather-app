@@ -8,11 +8,7 @@ const Footer = styled.footer`
   line-height: 17px;
   color: #a09fb1;
   text-align: center;
-  // position: absolute;
   margin-block-end: 25px;
-  bottom: 25px;
-  right: 0;
-  left: 0;
 
   a {
     color: inherit;
@@ -23,9 +19,9 @@ const Footer = styled.footer`
 const FooterCompoent = () => {
   return (
     <Footer className="footer">
-        <p className="footer-content">
-            created by <a href="https://devchallenges.io/portfolio/7heDoer">7heDoer</a> - devChallenges.io
-        </p>
+      <p className="footer-content">
+        created by <a href="https://devchallenges.io/portfolio/7heDoer">7heDoer</a> - devChallenges.io
+      </p>
     </Footer>
   )
 }

@@ -30,7 +30,6 @@ function App() {
   const [places, setPlaces] = useState(false);
 
 
-  const SearchPlaces = lazy(() => import('./Components/SearchPlaces'));
   const Aside = lazy(() => import('./Components/Layout/Aside'))
   const Main = lazy(() => import('./Components/Layout/Main'))
 
@@ -80,29 +79,17 @@ function App() {
       <Div className="App">
         <Suspense fallback={<Loading />}>
 
-          {
-            (places) ? 
-            <Suspense>
-
-              <SearchPlaces 
-                setPlaces={setPlaces} 
-                setCity={setCity} 
-                setCountry={setCountry} 
-                setWeather={setWeather} 
-              />
-            </Suspense>
-            : 
-            <Aside 
-              today={today} 
-              city={city} 
-              country={country} 
-              setCity={setCity}
-              setCountry={setCountry} 
-              setWeather={setWeather}
-              fahrenheit={fahrenheit}
-              setPlaces={setPlaces}
-            />
-          }
+         
+          <Aside 
+            today={today} 
+            city={city} 
+            country={country} 
+            setCity={setCity}
+            setCountry={setCountry} 
+            setWeather={setWeather}
+            fahrenheit={fahrenheit}
+            setPlaces={setPlaces}
+          />
           <Main 
             weather={weather}
             fahrenheit={fahrenheit}

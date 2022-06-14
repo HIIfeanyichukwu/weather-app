@@ -2,7 +2,6 @@ import React, { lazy, Suspense, useState } from 'react'
 import styled from 'styled-components'
 import {MdOutlineSearch} from 'react-icons/md'
 import close from '../assets/close.svg'
-// import SearchItem from './UI/SearchItem'
 
 import {countries} from 'countries-list'
 import cities from 'cities.json'
@@ -11,13 +10,18 @@ import cities from 'cities.json'
 const Place = styled.div`
     background-color: #1E213A;
     padding-block: 12px;
-    // padding-inline: 46px;
+    padding-inline: 1rem;
     block-size: 100%;
     display: flex;
     flex-direction: column;
 
     
     inline-size: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    // height: 100vh;
+    overflow: hidden;
     
 `
 
@@ -36,17 +40,17 @@ const Close = styled.button`
     background-color: transparent;
     white-space: nowrap;
     cursor: pointer;
-    margin-inline-end: 1rem;
+    // margin-inline-end: 1rem;
 
 
 `
 
 const SearchBox = styled.div`
-    position: relative;
+    // position: relative;
     font-size: 1rem;
     line-height: 18px;
     display: flex;
-    gap: 12px;
+    gap: .5rem;
     margin-block-start: 45px;
     font-family: "Raleway", sans-serif;
     margin-block-end: 52px;
