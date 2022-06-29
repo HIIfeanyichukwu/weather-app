@@ -8,7 +8,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://doportfolio.surge.sh/">
       Demo
     </a>
     <span> | </span>
@@ -89,4 +89,4 @@ $ npm start
 
 - Website [your-website.com](https://{your-web-site-link})
 - GitHub [@your-username](https://{github.com/your-usermame})
-- Twitter [@your-twitter](https://{twitter.com/your-username})
+- Twitter [@HIIfeanyichukwu](https://twitter.com/HIIfeanyichukwu)
